@@ -3,6 +3,7 @@ package com.carrot.writeservice.board.repository;
 import com.carrot.writeservice.board.model.SaveBoardParam;
 import com.carrot.writeservice.board.model.SearchBoardModel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface BoardRepository {
     SearchBoardModel selectBoardInfo(Long id);
 
     // 게시글 저장
-    void postBoardInfo(SaveBoardParam saveBoardParam);
+    void postBoardInfo(@Param("saveBoardParam") SaveBoardParam saveBoardParam);
 }

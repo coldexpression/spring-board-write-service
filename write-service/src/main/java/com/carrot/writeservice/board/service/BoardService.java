@@ -3,10 +3,16 @@ package com.carrot.writeservice.board.service;
 import com.carrot.writeservice.board.model.SaveBoardParam;
 import com.carrot.writeservice.board.model.SearchBoardModel;
 import com.carrot.writeservice.board.repository.BoardRepository;
+import com.carrot.writeservice.common.FileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -15,6 +21,7 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final FileUtils fileUtils;
 
     public List<SearchBoardModel> searchBoardInfos() {
         List<SearchBoardModel> searchBoardModels = boardRepository.selectBoardInfos();
@@ -29,11 +36,10 @@ public class BoardService {
         return boardRepository.selectBoardInfo(id);
     }
 
-    public void saveBoardInfo(String title, String path) {
-        SaveBoardParam saveBoardParam = SaveBoardParam.builder()
-                .title(title)
-                .path(path)
-                .build();
-        boardRepository.postBoardInfo(saveBoardParam);
+    public void saveBoardInfo(String title, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+        if (!ObjectUtils.isEmpty(multipartHttpServletRequest)) {
+            SaveBoardParam saveBoardParam = fileUtils.parseFileInfo(title, multipartHttpServletRequest);
+            boardRepository.postBoardInfo(saveBoardParam);
+        }
     }
 }

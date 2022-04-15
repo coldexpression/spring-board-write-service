@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -35,8 +37,8 @@ public class BoardController {
     }
 
     @PostMapping("/add")
-    public String saveBoardInfo(@RequestParam String title, @RequestParam String path) {
-        boardService.saveBoardInfo(title, path);
-        return "home/infos";
+    public String saveBoardInfo(@RequestParam String title, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+        boardService.saveBoardInfo(title, multipartHttpServletRequest);
+        return "redirect:/home/infos";
     }
 }

@@ -5,7 +5,8 @@
 <mapper namespace="com.carrot.writeservice.board.repository.BoardRepository">
     <select id="selectBoardInfos" resultType="com.carrot.writeservice.board.model.SearchBoardModel">
         SELECT
-            title AS title
+            board_id AS id
+            ,title AS title
             ,file_name AS img_name
             ,save_path AS path
             ,reg_date AS date
@@ -15,7 +16,8 @@
 
     <select id="selectBoardInfo" resultType="com.carrot.writeservice.board.model.SearchBoardModel">
         SELECT
-            title AS title
+            board_id AS id
+             ,title AS title
              ,file_name AS img_name
              ,save_path AS path
              ,reg_date AS date
@@ -26,9 +28,16 @@
     </select>
 
     <insert id="postBoardInfo" parameterType="map">
+        <![CDATA[
         INSERT INTO
-            board(title, file_name, save_path, reg_date)
+        board(title, file_name, save_path, reg_date)
         VALUES
-            (#{saveBoardParam.title}, #{saveBoardParam.fileName}, #{saveBoardParam.path}, DATE_FORMAT(NOW(), '%Y.%m.%d'))
+        (
+            #{saveBoardParam.title},
+            #{saveBoardParam.fileName},
+            #{saveBoardParam.path},
+            DATE_FORMAT(NOW(), '%Y.%m.%d')
+            )
+        ]]>
     </insert>
 </mapper>
