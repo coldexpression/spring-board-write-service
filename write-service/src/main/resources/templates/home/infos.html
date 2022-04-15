@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div>
+        <h2>게시판 목록</h2>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button th:onclick="|location.href='@{/home/infos/add}'|" type="button">글쓰기</button>
+        </div>
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>제목</th>
+                <th>첨부파일</th>
+                <th>작성날짜</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="info : ${infos}">
+                <td><a th:href="@{|/home/infos/${info.title}|}" th:text="${info.title}">게시글 제목</a></td>
+                <td><a th:text="${info.path}">게시글 이미지</a></td>
+                <td><a th:text="${info.date}">게시글 작성 날짜</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
