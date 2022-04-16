@@ -37,9 +37,8 @@ public class BoardService {
     }
 
     public void saveBoardInfo(String title, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
-        if (!ObjectUtils.isEmpty(multipartHttpServletRequest)) {
-            SaveBoardParam saveBoardParam = fileUtils.parseFileInfo(title, multipartHttpServletRequest);
-            boardRepository.postBoardInfo(saveBoardParam);
-        }
+        log.info("title = {}" , title);
+        SaveBoardParam saveBoardParam = fileUtils.parseFileInfo(title, multipartHttpServletRequest);
+        boardRepository.postBoardInfo(saveBoardParam);
     }
 }

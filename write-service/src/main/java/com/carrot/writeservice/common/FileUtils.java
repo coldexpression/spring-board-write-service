@@ -35,7 +35,6 @@ public class FileUtils {
                     if (ObjectUtils.isEmpty(contentType)) break;
                     if (contentType.contains("image/jpeg")) originalFileExtension = ".jpg";
                     else if (contentType.contains("image/png")) originalFileExtension = ".png";
-                    else if (contentType.contains("image/gif")) originalFileExtension = ".gif";
                     else break;
                 }
                 String newFileName = Long.toString(System.nanoTime()) + originalFileExtension;
@@ -49,6 +48,6 @@ public class FileUtils {
                 return saveBoardParam;
             }
         }
-        return null;
+        return new SaveBoardParam("", title, "");
     }
 }

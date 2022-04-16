@@ -27,8 +27,8 @@
             top: 50%;
             left: 50%;
 
-            width: 400px;
-            height: 600px;
+            width: 1000px;
+            height: 500px;
 
             padding: 40px;
 
@@ -36,7 +36,7 @@
 
             background-color: rgb(255, 255, 255);
             border-radius: 10px;
-            box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+            box-shadow: 0 4px 3px 0 rgba(34, 36, 38, 0.15);
 
             transform: translateX(-50%) translateY(-50%);
         }
@@ -63,14 +63,16 @@
             </thead>
             <tbody>
             <tr th:each="info : ${infos}">
-                <td th:id="${info.id}" class="row-open-popup" onclick="showModal()"><a th:text="${info.title}">게시글 제목</a></td>
-                <td th:id="${info.id}" class="row-open-popup" onclick="showModal()"><img th:src="@{|/upload/${info.path}|}" th:title="${info.imgName}" height="200" width="180" /></td>
-                <td th:id="${info.id}" class="row-open-popup" onclick="showModal()"><a th:text="${info.date}">게시글 작성 날짜</a></td>
-                <div class="modal">
+                <td th:id="${info.id}" class="row-open-popup" th:onclick="|javascript:showModal('${info.id}')|"><a th:text="${info.title}">게시글 제목</a></td>
+                <td th:id="${info.id}" class="row-open-popup" th:onclick="|javascript:showModal('${info.id}')|"><img th:src="@{|/upload/${info.path}|}" th:title="${info.imgName}" height="200" width="180" /></td>
+                <td th:id="${info.id}" class="row-open-popup" th:onclick="|javascript:showModal('${info.id}')|"><a th:text="${info.date}">게시글 작성 날짜</a></td>
+                <div th:class="modal" th:id="${info.id}">
                     <div class="modal_body">
                         <h2 th:text="${info.title}">모달 창</h2>
-                        <p th:text="${info.title}">내용</p>
-                        <button class="btn-modal-close" onclick="closeModal()" type="button">닫기</button>
+                        <img th:src="@{|/upload/${info.path}|}" th:title="${info.imgName}" height="350" width="800" />
+                        <div>
+                        <button class="btn-modal-close" th:onclick="|javascript:closeModal('${info.id}')|" type="button">닫기</button>
+                        </div>
                     </div>
                     <div class="modal_layer"></div>
                 </div>

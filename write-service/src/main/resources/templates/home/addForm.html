@@ -23,12 +23,12 @@
                     </div>
                 </div>
                 <div>
-                    <input type="text" id="title" name="title" placeholder="제목을 입력하세요" class="form-control">
+                    <input type="text" id="title" name="title" placeholder="제목을 입력하세요" maxlength="15" class="form-control">
                 </div>
                 <div>
-                    <input type="text" id="path_text" name="path_text" value="선택한 파일 없음" class="form-control" disabled="disabled">
-                    <label for="path" th:onclick="showText()">업로드</label>
-                    <input type="file" id="path" name="path" class="upload-hidden" multiple="multiple" style="display:none" accept="image/*">
+                    <input type="text" id="path_text" name="path_text" placeholder="선택한 파일 없음" class="form-control" disabled="disabled">
+                    <label for="path">업로드</label>
+                    <input type="file" id="path" name="path" class="upload-hidden" onchange="fileCheck()" multiple="multiple" style="display:none" accept="image/*">
                 </div>
             </form>
         </div>
